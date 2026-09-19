@@ -14,9 +14,9 @@ const listingSchema = new mongoose.Schema({
         maxlength: 1000
     },
     image: {
-        type: String, // store image URL or path
-       default: "https://www.istockphoto.com/photo/model-house-on-blue-background-gm1283468648-380877508?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Ffree-images-of-house&utm_term=free+images+of+house%3A%3Areset-search-state%3Acontrol%3Ab4468ff8-d0cd-4761-9d06-c3d455ac45ed",
-        set: v => v=== '' ? "https://www.istockphoto.com/photo/model-house-on-blue-background-gm1283468648-380877508?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Ffree-images-of-house&utm_term=free+images+of+house%3A%3Areset-search-state%3Acontrol%3Ab4468ff8-d0cd-4761-9d06-c3d455ac45ed" : v, // Convert empty string to undefined
+        type: String,
+        default: "/assets/cottage.svg",
+        set: v => v === '' ? "/assets/cottage.svg" : v,
     },
     price: {
         type: Number,
@@ -30,6 +30,10 @@ const listingSchema = new mongoose.Schema({
     country: {
         type: String,
         required: [true, "Country is required"]
+    },
+    createdBy: {
+        type: String,
+        default: null
     },
     createdAt: {
         type: Date,

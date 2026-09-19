@@ -1,0 +1,151 @@
+<%- layout('layout/boilerplate') -%>
+
+<section class="home-hero">
+  <div class="container hero-layout">
+    <div class="hero-text">
+      <span class="eyebrow">Stay somewhere unforgettable</span>
+      <h1>Find the perfect place to stay, anywhere.</h1>
+      <p>Explore cozy homes, luxury villas, and city escapes designed for every kind of trip.</p>
+
+      <div class="home-actions">
+        <a href="/explore" class="primary-btn">Explore stays</a>
+        <a href="/host" class="secondary-btn">Become a host</a>
+      </div>
+
+      <div class="mini-stats">
+        <div>
+          <strong>2k+</strong>
+          <span>Happy guests</span>
+        </div>
+        <div>
+          <strong>400+</strong>
+          <span>Unique homes</span>
+        </div>
+        <div>
+          <strong>4.9/5</strong>
+          <span>Average rating</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img src="/assets/lakeview-retreat.jpg" alt="Featured home">
+      <div class="promo-card">
+        <span class="pill">Featured</span>
+        <h3>Lakeview Retreat</h3>
+        <p>Mountain view · 2 bedrooms · 4 guests</p>
+        <strong>$280/night</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="container">
+    <div class="section-copy">
+      <span class="eyebrow">Popular recommendations</span>
+      <h2>Trending stays this week</h2>
+    </div>
+
+    <div class="row g-4">
+      <% for (let listing of featuredListings) { %>
+        <div class="col-lg-4 col-md-6">
+          <article class="listing-card">
+            <img src="<%= listing.image %>" alt="<%= listing.title %>">
+            <div class="listing-body">
+              <div class="listing-topline">
+                <span class="listing-location"><i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %></span>
+                <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
+              </div>
+              <h3><%= listing.title %></h3>
+              <p><%= listing.description %></p>
+              <div class="listing-footer">
+                <strong>$<%= listing.price %></strong>
+                <span>night</span>
+                <a href="/listings/<%= listing._id %>" class="card-btn">View</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<section class="home-section alt-block">
+  <div class="container about-grid">
+    <div class="about-copy">
+      <span class="eyebrow">About us</span>
+      <h2>We help travelers discover spaces that feel like home.</h2>
+      <p>StayNest brings together handcrafted properties, modern comfort, and personalized experiences for unforgettable stays.</p>
+    </div>
+
+    <div class="about-points">
+      <div class="point-box">
+        <i class="fa-solid fa-shield-heart"></i>
+        <div>
+          <h4>Trusted stays</h4>
+          <p>Quality checked homes with convenient amenities.</p>
+        </div>
+      </div>
+      <div class="point-box">
+        <i class="fa-solid fa-headset"></i>
+        <div>
+          <h4>24/7 support</h4>
+          <p>Friendly help before, during, and after your trip.</p>
+        </div>
+      </div>
+      <div class="point-box">
+        <i class="fa-solid fa-earth-americas"></i>
+        <div>
+          <h4>Global reach</h4>
+          <p>Find stays in vibrant cities, seaside escapes, and nature retreats.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="container">
+    <div class="section-copy">
+      <span class="eyebrow">Customer reviews</span>
+      <h2>Travelers love staying with us</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p>“The apartment was spotless, beautifully designed, and exactly how it looked in the photos. It felt like a boutique hotel.”</p>
+          <div class="review-person">
+            <strong>Sarah M.</strong>
+            <span>London</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p>“Everything from check-in to the host communication was smooth. The location was perfect and the view was incredible.”</p>
+          <div class="review-person">
+            <strong>Daniel R.</strong>
+            <span>Toronto</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p>“This was one of the most comfortable stays we’ve had. The home felt warm, modern, and truly welcoming.”</p>
+          <div class="review-person">
+            <strong>Aisha K.</strong>
+            <span>Dubai</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

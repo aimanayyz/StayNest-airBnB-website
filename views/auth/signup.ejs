@@ -1,0 +1,35 @@
+<%- layout('layout/boilerplate') -%>
+
+<div class="container py-5">
+  <div class="auth-shell">
+    <div class="auth-header">
+      <span class="eyebrow">Start hosting</span>
+      <h1>Sign Up</h1>
+    </div>
+
+    <% if (error) { %>
+      <div class="alert error-alert"><%= error %></div>
+    <% } %>
+
+    <form method="POST" action="/signup" class="auth-form">
+      <div class="mb-3">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" value="<%= formData.name || '' %>" required>
+      </div>
+      <div class="mb-3">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="<%= formData.email || '' %>" required>
+      </div>
+      <div class="mb-4">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" value="<%= formData.password || '' %>" required>
+      </div>
+      <button type="submit" class="primary-btn w-100">Create account</button>
+    </form>
+
+    <div class="auth-switch-bar">
+      <span>Already have an account?</span>
+      <a href="/login" class="secondary-btn small">Login</a>
+    </div>
+  </div>
+</div>

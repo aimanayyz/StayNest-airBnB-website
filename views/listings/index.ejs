@@ -1,41 +1,99 @@
 <%- layout('layout/boilerplate') -%>
 
-<div class="container mt-4">
-
-    <h1 class="mb-3">All Listings</h1>
-
-    <form action="/listings/new" method="GET" class="mb-4">
-        <button class="btn btn-success">New Listing</button>
-    </form>
-
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <% for (let listing of listings) { %>
-
-            <div class="col">
-                <div class="card h-100">
-                    <img 
-                        src="<%= listing.image %>" 
-                        class="card-img-top" 
-                        alt="listing image"
-                    >
-
-                    <div class="card-body">
-                        <h5 class="card-title"><%= listing.title %></h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title.
-                        </p>
-
-                        <a 
-                            href="/listings/<%= listing._id %>" 
-                            class="btn btn-primary"
-                        >
-                            View Listing
-                        </a>
-                    </div>
-                </div>
+<section class="hero-section">
+    <div class="container hero-inner">
+        <div class="hero-copy">
+            <span class="eyebrow">Book unforgettable stays</span>
+            <h1>Find a place that feels like home.</h1>
+            <p>Discover unique homes, stylish cabins, and cozy city escapes curated for every kind of traveler.</p>
+            <div class="hero-actions">
+                <a href="/listings" class="primary-btn">Explore stays</a>
+                <a href="/listings/new" class="secondary-btn">Add your place</a>
             </div>
+        </div>
+        <div class="hero-card">
+            <img src="/assets/image_2a8347fb.jpg" alt="Featured stay">
+            <div class="hero-card-info">
+                <div>
+                    <p class="mini-label">Featured</p>
+                    <h4>Coastal Villa</h4>
+                </div>
+                <span>$420/night</span>
+            </div>
+        </div>
+    </div>
+</section>
 
+<section class="search-section">
+    <div class="container">
+        <form class="search-bar" method="GET" action="/explore">
+            <div class="search-field">
+                <label>Where</label>
+                <input type="text" name="search" value="<%= search %>" placeholder="City, country, or title">
+            </div>
+            <div class="search-field">
+                <label>Max price</label>
+                <select name="maxPrice">
+                    <option value="">Any</option>
+                    <option value="100" <%= maxPrice === '100' ? 'selected' : '' %>>$100</option>
+                    <option value="200" <%= maxPrice === '200' ? 'selected' : '' %>>$200</option>
+                    <option value="300" <%= maxPrice === '300' ? 'selected' : '' %>>$300</option>
+                    <option value="500" <%= maxPrice === '500' ? 'selected' : '' %>>$500</option>
+                </select>
+            </div>
+            <button type="submit" class="primary-btn small">Search</button>
+        </form>
+    </div>
+</section>
+
+<section class="listings-section">
+    <div class="container">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">Popular homes</span>
+                <h2>Handpicked stays for your next trip</h2>
+            </div>
+            <a href="/listings/new" class="primary-btn small">Create listing</a>
+        </div>
+
+        <% if (listings.length === 0) { %>
+            <div class="empty-state">
+                <h3>No stays match your search.</h3>
+                <p>Try another location or a higher budget.</p>
+            </div>
+        <% } else { %>
+            <div class="row g-4">
+                <% for (let listing of listings) { %>
+                    <div class="col-lg-4 col-md-6">
+                        <article class="listing-card property-card">
+                            <div class="property-header">
+                                <div class="property-icon">
+                                    <img src="<%= listing.image %>" alt="<%= listing.title %>">
+                                </div>
+                                <div class="property-title-wrap">
+                                    <h3><%= listing.title %></h3>
+                                </div>
+                            </div>
+
+                            <div class="property-location-line">
+                                <span class="listing-location"><i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %></span>
+                                <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                            </div>
+
+                            <div class="property-body">
+                                <h4><%= listing.title %></h4>
+                                <p><%= listing.description %></p>
+                            </div>
+
+                            <div class="listing-footer property-footer">
+                                <strong>$<%= listing.price %></strong>
+                                <span>night</span>
+                                <a href="/listings/<%= listing._id %>" class="card-btn">View</a>
+                            </div>
+                        </article>
+                    </div>
+                <% } %>
+            </div>
         <% } %>
     </div>
-
-</div>
+</section>

@@ -1,0 +1,51 @@
+<%- layout('layout/boilerplate') -%>
+
+<div class="container py-5">
+  <div class="dashboard-header">
+    <div>
+      <span class="eyebrow">Hosting</span>
+      <h1>My Listings</h1>
+    </div>
+    <a href="/listings/new" class="primary-btn small">Add new stay</a>
+  </div>
+
+  <% if (listings.length === 0) { %>
+    <div class="empty-state">
+      <h3>You haven’t listed any place yet.</h3>
+      <p>Start by creating your first stay.</p>
+    </div>
+  <% } else { %>
+    <div class="row g-4">
+      <% for (let listing of listings) { %>
+        <div class="col-lg-4 col-md-6">
+          <article class="listing-card property-card">
+            <div class="property-header">
+              <div class="property-icon">
+                <img src="<%= listing.image %>" alt="<%= listing.title %>">
+              </div>
+              <div class="property-title-wrap">
+                <h3><%= listing.title %></h3>
+              </div>
+            </div>
+
+            <div class="property-location-line">
+              <span class="listing-location"><i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %></span>
+              <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
+            </div>
+
+            <div class="property-body">
+              <h4><%= listing.title %></h4>
+              <p><%= listing.description %></p>
+            </div>
+
+            <div class="listing-footer property-footer">
+              <strong>$<%= listing.price %></strong>
+              <span>night</span>
+              <a href="/listings/<%= listing._id %>/edit" class="card-btn">Edit</a>
+            </div>
+          </article>
+        </div>
+      <% } %>
+    </div>
+  <% } %>
+</div>

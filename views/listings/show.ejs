@@ -1,14 +1,94 @@
-<% layout('layout/boilerplate') %>
-<body>
-    <h1>listing details</h1>
-    <ul>
-        <li>Title: <%= listing.title %></li>
-        <li>Price: $<%= listing.price %></li>
-        <li>Description: <%= listing.description %></li>
-        <li>Location: <%= listing.location %></li>
-    </ul>
-    <a href="/listings/<%=listing._id%>/edit">edit listing</a>
-    <form method="Post" ACTION="/listings/<%=listing._id%>?_method=DELETE">
-        <button>DELETE</button>
-    </form>
-</body>
+<%- layout('layout/boilerplate') -%>
+
+<div class="container py-5">
+    <div class="detail-page">
+        <div class="detail-image-wrap">
+            <img src="<%= listing.image %>" alt="<%= listing.title %>">
+        </div>
+
+        <div class="detail-content">
+            <span class="eyebrow">Entire home in <%= listing.location %></span>
+            <h1><%= listing.title %></h1>
+            <div class="meta-row">
+                <span><i class="fa-solid fa-map-pin"></i> <%= listing.location %>, <%= listing.country %></span>
+                <span><i class="fa-solid fa-star"></i> 4.9 · 128 reviews</span>
+            </div>
+
+            <div class="amenities-grid">
+                <div class="amenity-box"><i class="fa-solid fa-house"></i> Private room</div>
+                <div class="amenity-box"><i class="fa-solid fa-wifi"></i> Fast Wi‑Fi</div>
+                <div class="amenity-box"><i class="fa-solid fa-snowflake"></i> Air conditioning</div>
+                <div class="amenity-box"><i class="fa-solid fa-square-parking"></i> Free parking</div>
+            </div>
+
+            <div class="description-box">
+                <h3>About this place</h3>
+                <p><%= listing.description %></p>
+            </div>
+
+            <div class="booking-box">
+                <div class="booking-top">
+                    <div>
+                        <strong>$<%= listing.price %></strong>
+                        <span>/ night</span>
+                    </div>
+                    <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                </div>
+                <div class="booking-actions">
+                    <% if (currentUser && currentUser.id.toString() === listing.createdBy) { %>
+                        <a href="/listings/<%= listing._id %>/edit" class="secondary-btn small">Edit</a>
+                        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                            <button class="danger-btn" type="submit">Delete</button>
+                        </form>
+                    <% } else { %>
+                        <% if (currentUser) { %>
+                            <button class="primary-btn small" data-bs-toggle="modal" data-bs-target="#bookingModal">Reserve</button>
+                        <% } else { %>
+                            <a href="/login" class="primary-btn small">Login to reserve</a>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content booking-modal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Book <%= listing.title %></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="/listings/<%= listing._id %>/book">
+                <div class="modal-body">
+                    <div class="booking-form-grid">
+                        <div>
+                            <label>Check-in</label>
+                            <input type="date" name="checkIn" required>
+                        </div>
+                        <div>
+                            <label>Check-out</label>
+                            <input type="date" name="checkOut" required>
+                        </div>
+                        <div class="full-width">
+                            <label>Guests</label>
+                            <select name="guests" required>
+                                <option value="2">2 guests</option>
+                                <option value="4">4 guests</option>
+                                <option value="6">6 guests</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="price-summary">
+                        <span>Total</span>
+                        <strong>$<%= listing.price %></strong>
+                    </div>
+                    <button type="submit" class="primary-btn">Confirm booking</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

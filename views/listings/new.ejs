@@ -3,7 +3,7 @@
 <div class="container mt-4">
     <h1 class="mb-4">Create a New Listing</h1>
 
-    <form method="POST" action="/listings">
+    <form method="POST" action="/listings" id="newListingForm">
 
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -65,20 +65,57 @@
             >
         </div>
 
-        <div class="mb-4">
-            <label for="image" class="form-label">Image URL</label>
+        <div class="mb-3">
+            <label for="imageUrl" class="form-label">Image URL</label>
             <input 
                 type="text" 
                 class="form-control" 
-                id="image" 
-                name="image" 
-                placeholder="Enter image URL"
+                id="imageUrl" 
+                name="imageUrl" 
+                placeholder="Paste a URL if you prefer"
             >
         </div>
+
+        <div class="mb-4">
+            <label for="imageFile" class="form-label">Upload image</label>
+            <input 
+                type="file" 
+                class="form-control" 
+                id="imageFile" 
+                accept="image/*"
+            >
+            <small class="form-help">Choose a file or paste an image URL.</small>
+        </div>
+
+        <input type="hidden" id="image" name="image" value="">
 
         <button type="submit" class="btn btn-primary">
             Create Listing
         </button>
 
     </form>
+
+    <script>
+      const imageFileInputNew = document.getElementById('imageFile');
+      const imageUrlInputNew = document.getElementById('imageUrl');
+      const imageHiddenInputNew = document.getElementById('image');
+
+      imageFileInputNew.addEventListener('change', function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          imageHiddenInputNew.value = event.target.result;
+          imageUrlInputNew.value = '';
+        };
+        reader.readAsDataURL(file);
+      });
+
+      imageUrlInputNew.addEventListener('input', function () {
+        if (this.value.trim()) {
+          imageHiddenInputNew.value = this.value.trim();
+        }
+      });
+    </script>
 </div>

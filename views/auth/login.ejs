@@ -1,0 +1,31 @@
+<%- layout('layout/boilerplate') -%>
+
+<div class="container py-5">
+  <div class="auth-shell">
+    <div class="auth-header">
+      <span class="eyebrow">Welcome back</span>
+      <h1>Login</h1>
+    </div>
+
+    <% if (error) { %>
+      <div class="alert error-alert"><%= error %></div>
+    <% } %>
+
+    <form method="POST" action="/login" class="auth-form">
+      <div class="mb-3">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="<%= formData.email || '' %>" required>
+      </div>
+      <div class="mb-4">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" value="<%= formData.password || '' %>" required>
+      </div>
+      <button type="submit" class="primary-btn w-100">Login</button>
+    </form>
+
+    <div class="auth-switch-bar">
+      <span>New here?</span>
+      <a href="/signup" class="secondary-btn small">Create an account</a>
+    </div>
+  </div>
+</div>

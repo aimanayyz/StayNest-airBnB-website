@@ -1,0 +1,58 @@
+<%- layout('layout/boilerplate') -%>
+
+<div class="container py-5">
+  <div class="dashboard-header">
+    <div>
+      <span class="eyebrow">Trips</span>
+      <h1>My Bookings</h1>
+    </div>
+  </div>
+
+  <div class="dashboard-section">
+    <h2>Booked stays</h2>
+    <% if (bookings.length === 0) { %>
+      <div class="empty-state small">
+        <h3>No bookings yet.</h3>
+        <p>Reserve a stay from the explore page.</p>
+      </div>
+    <% } else { %>
+      <div class="booking-list">
+        <% for (let booking of bookings) { %>
+          <div class="booking-item">
+            <img src="<%= booking.listing.image %>" alt="<%= booking.listing.title %>">
+            <div class="booking-item-content">
+              <h3><%= booking.listing.title %></h3>
+              <p><%= booking.listing.location %>, <%= booking.listing.country %></p>
+              <small><%= new Date(booking.checkIn).toLocaleDateString() %> → <%= new Date(booking.checkOut).toLocaleDateString() %></small>
+              <strong>$<%= booking.totalPrice %> total</strong>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="dashboard-section">
+    <h2>Bookings received</h2>
+    <% if (hostedBookings.length === 0) { %>
+      <div class="empty-state small">
+        <h3>No guest bookings yet.</h3>
+        <p>When someone books your place, it will appear here.</p>
+      </div>
+    <% } else { %>
+      <div class="booking-list">
+        <% for (let booking of hostedBookings) { %>
+          <div class="booking-item">
+            <img src="<%= booking.listing.image %>" alt="<%= booking.listing.title %>">
+            <div class="booking-item-content">
+              <h3><%= booking.listing.title %></h3>
+              <p>Booked by <%= booking.userName || 'Guest' %></p>
+              <small><%= new Date(booking.checkIn).toLocaleDateString() %> → <%= new Date(booking.checkOut).toLocaleDateString() %></small>
+              <strong>$<%= booking.totalPrice %> received</strong>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</div>

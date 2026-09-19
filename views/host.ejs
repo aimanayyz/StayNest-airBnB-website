@@ -1,0 +1,28 @@
+<%- layout('layout/boilerplate') -%>
+
+<div class="container py-5">
+  <div class="host-shell">
+    <div class="host-banner">
+      <span class="eyebrow">Host with confidence</span>
+      <h1>Turn your space into a loved stay.</h1>
+      <p>List your property, manage availability, and welcome guests from anywhere in the world.</p>
+    </div>
+
+    <% if (user) { %>
+      <div class="host-card">
+        <h3>Welcome, <%= user.name %></h3>
+        <p>You are signed in and ready to list a new stay.</p>
+        <a href="/listings/new" class="primary-btn">Create your listing</a>
+      </div>
+    <% } else { %>
+      <div class="host-card">
+        <h3>Need an account first</h3>
+        <p>Sign up or log in to start hosting.</p>
+        <div class="host-actions">
+          <a href="/signup" class="primary-btn">Sign Up</a>
+          <a href="/login" class="secondary-btn">Login</a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>

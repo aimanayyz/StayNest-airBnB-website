@@ -1,15 +1,28 @@
-<nav class="navbar navbar-expand-lg bg-body-light bottom-border sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><i class="fa-solid fa-compass"></i></a>
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <span class="brand-mark"><i class="fa-solid fa-compass"></i></span>
+      <span>StayNest</span>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active"  href="/listings">Home</a>
-        <a class="nav-link" href="/listings">all listing</a>
-        <a class="nav-link" href="/listings/new">new listing</a>
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+      <div class="navbar-nav ms-auto align-items-lg-center">
+        <a class="nav-link <%= currentPath === '/' ? 'active' : '' %>" href="/">Home</a>
+        <a class="nav-link <%= currentPath === '/explore' || currentPath.startsWith('/listings') ? 'active' : '' %>" href="/explore">Explore</a>
+        
+
+        <% if (currentUser) { %>
+          <a class="nav-link <%= currentPath === '/dashboard/my-bookings' ? 'active' : '' %>" href="/dashboard/my-bookings">My Bookings</a>
+          <a class="nav-link <%= currentPath === '/dashboard/my-listings' ? 'active' : '' %>" href="/dashboard/my-listings">My Listings</a>
+          <span class="nav-user">Hi, <%= currentUser.name %></span>
+          <a class="nav-btn" href="/logout">Logout</a>
+        <% } else { %>
+          <a class="nav-link <%= currentPath === '/login' ? 'active' : '' %>" href="/login">Login</a>
+          <a class="nav-link <%= currentPath === '/signup' ? 'active' : '' %>" href="/signup">Sign Up</a>
+          <a class="nav-btn" href="/host">Become a host</a>
+        <% } %>
       </div>
     </div>
   </div>
