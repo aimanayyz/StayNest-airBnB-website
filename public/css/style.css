@@ -1,0 +1,28 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: aqua;
+}
+.fa-compass{
+    color: orange;
+}
+.navbar{
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    background-color: white;
+}
+.info-socials a{
+    margin-right: 15px;
+    color: black;
+    text-decoration: none;
+}
+.info-socials a:hover{
+    color: orange;
+}
+.footer-info{
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #f8f9fa;
+    text-align: center;
+    display:flex;
+    justify-content: center;
+    flex-wrap:wrap
+}

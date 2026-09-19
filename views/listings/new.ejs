@@ -1,0 +1,84 @@
+<%- layout('layout/boilerplate') -%>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Create a New Listing</h1>
+
+    <form method="POST" action="/listings">
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="title" 
+                name="title" 
+                placeholder="Enter title" 
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input 
+                type="number" 
+                class="form-control" 
+                id="price" 
+                name="price" 
+                placeholder="Enter price" 
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="description" 
+                name="description" 
+                placeholder="Enter description" 
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="location" 
+                name="location" 
+                placeholder="Enter location" 
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="country" 
+                name="country" 
+                placeholder="Enter country" 
+                required
+            >
+        </div>
+
+        <div class="mb-4">
+            <label for="image" class="form-label">Image URL</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="image" 
+                name="image" 
+                placeholder="Enter image URL"
+            >
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Create Listing
+        </button>
+
+    </form>
+</div>
